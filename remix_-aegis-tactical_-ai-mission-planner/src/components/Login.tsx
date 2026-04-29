@@ -16,7 +16,7 @@ export default function Login({ onLogin }: LoginProps) {
   e.preventDefault();
   
   // Hardcoded credentials
-  if (username === 'AEGIS-2025' && password === 'tactical@123') {
+  if (username === 'Aegisagent' && password === 'tactical@123') {
     setIsAuthenticating(true);
     setTimeout(() => {
       setScanComplete(true);
