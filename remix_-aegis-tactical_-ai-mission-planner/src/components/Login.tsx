@@ -13,17 +13,21 @@ export default function Login({ onLogin }: LoginProps) {
   const [scanComplete, setScanComplete] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
+  
+  // Hardcoded credentials
+  if (username === 'AEGIS-2025' && password === 'tactical@123') {
     setIsAuthenticating(true);
-    
-    // Simulate Face ID scanning sequence
     setTimeout(() => {
       setScanComplete(true);
       setTimeout(() => {
         onLogin();
       }, 1000);
     }, 2500);
-  };
+  } else {
+    alert('ACCESS DENIED: Invalid credentials');
+  }
+};
 
   return (
     <div className="relative h-screen w-full bg-bg flex items-center justify-center overflow-hidden font-sans">
