@@ -13,22 +13,22 @@ export default function Login({ onLogin }: LoginProps) {
   const [scanComplete, setScanComplete] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+ const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  setError('');
 
-    if (username === 'Aegisagent' && password === 'tactical@123') {
-      setIsAuthenticating(true);
+  if (username === 'Aegisagent' && password === 'tactical@123') {
+    setIsAuthenticating(true);
+    setTimeout(() => {
+      setScanComplete(true);
       setTimeout(() => {
-        setScanComplete(true);
-        setTimeout(() => {
-          onLogin();
-        }, 1000);
-      }, 2500);
-    } else {
-      setError('ACCESS DENIED: Invalid credentials');
-    }
-  };
+        onLogin();
+      }, 1000);
+    }, 2500);
+  } else {
+    setError('ACCESS DENIED: Invalid credentials');
+  }
+};
 
   return (
     <div className="relative h-screen w-full bg-bg flex items-center justify-center overflow-hidden font-sans">
