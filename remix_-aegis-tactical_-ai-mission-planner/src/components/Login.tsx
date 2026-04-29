@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Shield, Lock, Scan, User, Key, CheckCircle } from 'lucide-react';
 
@@ -11,23 +11,24 @@ export default function Login({ onLogin }: LoginProps) {
   const [password, setPassword] = useState('');
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [scanComplete, setScanComplete] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  // Hardcoded credentials
-  if (username === 'Aegisagent' && password === 'tactical@123') {
-    setIsAuthenticating(true);
-    setTimeout(() => {
-      setScanComplete(true);
+    e.preventDefault();
+    setError('');
+
+    if (username === 'Aegisagent' && password === 'tactical@123') {
+      setIsAuthenticating(true);
       setTimeout(() => {
-        onLogin();
-      }, 1000);
-    }, 2500);
-  } else {
-    alert('ACCESS DENIED: Invalid credentials');
-  }
-};
+        setScanComplete(true);
+        setTimeout(() => {
+          onLogin();
+        }, 1000);
+      }, 2500);
+    } else {
+      setError('ACCESS DENIED: Invalid credentials');
+    }
+  };
 
   return (
     <div className="relative h-screen w-full bg-bg flex items-center justify-center overflow-hidden font-sans">
@@ -81,6 +82,12 @@ export default function Login({ onLogin }: LoginProps) {
                   />
                 </div>
               </div>
+
+              {error && (
+                <div className="text-warning text-[10px] font-mono uppercase tracking-widest text-center border border-warning/30 p-2 bg-warning/10">
+                  {error}
+                </div>
+              )}
 
               <button
                 type="submit"
