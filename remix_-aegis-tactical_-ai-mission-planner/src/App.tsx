@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import SlideDeck from './components/SlideDeck';
@@ -11,17 +10,6 @@ type AppState = 'BOOT' | 'LANDING' | 'LOGIN' | 'DASHBOARD' | 'PRESENTATION';
 
 export default function App() {
   const [state, setState] = useState<AppState>('BOOT');
-
-  // 🔥 Keyboard shortcut (press "P" for presentation)
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (!e.key) return;
-      if (e.key.toLowerCase() === 'p') setState('PRESENTATION');
-      if (e.key.toLowerCase() === 'd') setState('DASHBOARD');
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, []);
 
   return (
     <div className="min-h-screen bg-bg selection:bg-accent/30 selection:text-white">
@@ -49,7 +37,7 @@ export default function App() {
           </motion.div>
         )}
 
-        {/* 🔐 LOGIN (Face ID simulation inside) */}
+        {/* 🔐 LOGIN */}
         {state === 'LOGIN' && (
           <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-full">
             <Login onLogin={() => setState('DASHBOARD')} />
